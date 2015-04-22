@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+dotfiles_dir="$dir/.dotfiles"
+files=( "$dotfiles_dir/.*" )
+
+for file in $files; do
+    file_name=$(basename $file)
+    if [[ "$file_name" == "." || "$file_name" == ".." ]]; then
+        continue
+    fi
+    dest="$HOME/$file_name"
+    if [ -e "$dest.bak" ]; then
+        mv -v "$dest.bak" "$dest"
+    fi
+done

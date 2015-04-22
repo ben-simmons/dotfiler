@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Set up this dotfiles module. Symlink the dotfiles from git repo into home directory.
+
+# Top-level dir of this dotfiles module is expected to be one up from this script
+dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+dotfiles_dir="$dir/.dotfiles"
+files=( "$dotfiles_dir/.*" )
+
+for file in $files; do
+    file_name=$(basename $file)
+    if [[ "$file_name" == "." || "$file_name" == ".." ]]; then
+        continue
+    fi
+    source="$dotfiles_dir/$file_name"
+    dest="$HOME/$file_name"
+    if [ -e "$dest" ]; then
+        mv -v "$dest" "$dest.bak"
+    fi
+    ln -sfvn "$source" "$dest"
+done
+
