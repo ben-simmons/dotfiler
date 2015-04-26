@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# ignore all output from cd
+chdir () {
+  cd "$@" >/dev/null
+}
+
+# get the full path to this dotfiler executable
+DOTFILER_FILE_DIRECTORY=$(chdir "${0%/*}" && pwd -P)
+
+# if the executable is a symlink target, then get the full path to source
+DOTFILER_SYMLINK=$(readlink "$0")
+if [ -n "$DOTFILER_SYMLINK" ] ; then
+  DOTFILER_SYMLINK_DIRECTORY=$(dirname "$DOTFILER_SYMLINK")
+  DOTFILER_FILE_DIRECTORY=$(chdir "$DOTFILER_FILE_DIRECTORY" &&
+                            chdir "$DOTFILER_SYMLINK_DIRECTORY" && pwd -P)
+fi
+
+# TODO what's best practice for linking to library files?
+DOTFILER_LIBRARY_DIRECTORY=$(chdir "$DOTFILER_FILE_DIRECTORY"/../lib && pwd -P)
+
+# TODO what's best practice for linking to local storage?
+HOME_DIRECTORY=$(cd "$HOME" && pwd -P)
+DOTFILER_HOME_DIRECTORY="$HOME"/.dotfiler
+
+if [[ ! -e "$DOTFILER_HOME_DIRECTORY" ]]; then
+  mkdir "$DOTFILER_HOME_DIRECTORY"
+elif [[ ! -d $dir ]]; then
+  echo "$DOTFILER_HOME_DIRECTORY already exists but is not a directory" 1>&2
+fi
+
+export DOTFILER_HOME="$HOME_DIRECTORY"/.dotfiler
+
+exec ruby -W0 "$DOTFILER_LIBRARY_DIRECTORY/dotfiler.rb" "$@"

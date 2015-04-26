@@ -36,13 +36,9 @@ MIT
 # TODO
 
 * Build dotfiler script
+* Build dotfiler-git: the plumbing
 * Build dotfiler-install: install a module, or use -s to install a snapshot. V1 should have a force mode and run in non-force mode by default, because it's critical to NOT destroy existing config without user's knowledge.
 * Build dotfiler-uninstall
-* Build dotfiler-freeze: output a snapshot
-* Build dotfiler-remote: show or set your git snapshot repo (only one repo allowed to start)
-* Build dotfiler-pull: pull a snapshot from the remote git repo
-* Build dotfiler-push: push your local snapshot to the remote git repo
-* Namespace the modules. E.g. you can only link one ```vim``` module.
+* Build dotfiler-profile: somewhat analogous to ```git branch```
 * Push example snapshot.
-* Better tools for migrating to Dotfiler.
 
