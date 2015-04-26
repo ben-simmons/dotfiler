@@ -1,0 +1,48 @@
+files:
+- file:
+    target: "$HOME/.test-file-local"
+    source:
+        local:
+            file_relpath: ".test-file-local"
+        remote:
+- file:
+    target: "$HOME/.test-file-remote"
+    source:
+        local: 
+        remote:
+            url: "https://github.com/simmbot/dotfiler-test"
+            dir_relpath: "dotfiler-test"
+            file_relpath: ".test-file-remote"
+- file:
+    target: "$HOME/.test-file-remote-overrides-local"
+    source:
+        local:
+            file_relpath: ".test-file-remote-overrides-local"
+        remote:
+            url: "https://github.com/simmbot/dotfiler-test"
+            dir_relpath: "dotfiler-test"
+            file_relpath: ".test-file-remote-overrides-local"
+- file:
+    target: "$HOME/test-directory-local/"
+    source:
+        local:
+            file_relpath: "test-directory-local/"
+        remote:
+- file:
+    target: "$HOME/test-directory-remote/"
+    source:
+        local:
+            file_relpath: "test-directory-remote/"
+        remote:
+            url: "https://github.com/simmbot/dotfiler-test"
+            dir_relpath: "dotfiler-test"
+            file_relpath: "test-directory-local/"
+- file:
+    target: "$HOME/test-directory-remote-overrides-local/"
+    source:
+        local:
+            file_relpath: "test-directory-remote-overrides-local/"
+        remote:
+            url: "https://github.com/simmbot/dotfiler-test"
+            dir_relpath: "dotfiler-test"
+            file_relpath: "test-directory-remote-overrides-local/"
